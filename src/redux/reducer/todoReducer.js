@@ -1,10 +1,10 @@
 const ADD_NEW = "ADD NEW";
 const DELETE_ITEM = "DELETE_ITEM";
-const FIND_ITEMS = "FIND_ITEMS";
+const SWITCH_DONE = "SWITCH_DONE"
 const initialState = {
   items: [
     { id: 0, text: "some text1", date: "228", done: false },
-    { id: 1, text: "some text2", date: "1337", done: false },
+    { id: 1, text: "some text2", date: "1337", done: true },
     { id: 2, text: "some text3", date: "1488", done: false },
     { id: 3, text: "some text4", date: "4:20", done: false },
   ],
@@ -31,20 +31,17 @@ export const todoReducer = (state = initialState, action) => {
     case DELETE_ITEM: {
       return {
         ...state,
-        items: state.items.filter((item) => item.id != action.placeholder),
+        items: state.items.filter((item) => item.id !== action.placeholder),
       };
     }
-    case FIND_ITEMS: {
-      debugger;
-      if (action.placeholder != "") {
-        return {
-          ...state,
-          items: state.items.filter((item) =>
-            item.text.includes(action.placeholder)
-          ),
-        };
+    case SWITCH_DONE:{
+      return{
+        ...state,
+        items: state.items.map((item)=>{
+          if(item.id === action.placeholder) return {...item,done:!item.done}
+          return item
+        })
       }
-      return state;
     }
     default:
       return state;
@@ -61,9 +58,10 @@ export const deleteItem = (id) => ({
   placeholder: id,
 });
 
-export const filterItem = (text) => ({
-  type: FIND_ITEMS,
-  placeholder: text,
-});
+export const setItemDone = (id)=>({
+  type:SWITCH_DONE,
+  placeholder: id
+})
+
 
 export default todoReducer;

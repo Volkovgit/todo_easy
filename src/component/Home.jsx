@@ -4,7 +4,7 @@ import Footer from "./footer/Footer";
 import style from "../app.module.css";
 import Header from "./header/Header";
 import { useSelector, useDispatch } from "react-redux";
-import { addNew, deleteItem } from "../redux/reducer/todoReducer";
+import { addNew, deleteItem, setItemDone } from "../redux/reducer/todoReducer";
 
 function Home() {
   const todoItems = useSelector(({ todoItems }) => todoItems.items);
@@ -31,7 +31,9 @@ function Home() {
     dispatch(deleteItem(id));
   };
 
-  
+  const switchItemDone = (id) => {
+    dispatch(setItemDone(id));
+  };
 
   return (
     <div>
@@ -40,7 +42,11 @@ function Home() {
           <Header findBySearch={findBySearch} />
         </div>
         <div className={style.body}>
-          <Body items={data} deleteItem={deleteTodoItem} />
+          <Body
+            items={data}
+            deleteItem={deleteTodoItem}
+            getDone={switchItemDone}
+          />
         </div>
         <div className={style.footer}>
           <Footer addNewItem={addTodo} />
