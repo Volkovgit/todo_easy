@@ -23,7 +23,7 @@ export const todoReducer = (state = initialState, action) => {
             id: state.items[state.items.length - 1].id + 1,
             text: action.placeholder,
             date: now,
-            done: false,
+            done: true,
           },
         ],
       };

@@ -1,6 +1,6 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
-const Header = ({ findBySearch }) => {
+import { TextField,Button } from "@material-ui/core";
+const Header = ({ findBySearch,setFilter }) => {
   let newSearchText = React.createRef();
 
   const onChangeInputField = (event) => {
@@ -19,6 +19,9 @@ const Header = ({ findBySearch }) => {
           onChange={(event) => onChangeInputField(event.target.value)}
         />
       </form>
+      <Button variant="contained" onClick={()=>setFilter(null)}>All</Button>
+      <Button variant="contained" onClick={()=>setFilter(false)}>Completed</Button>
+      <Button variant="contained" onClick={()=>setFilter(true)}>Not Done</Button>
     </div>
   );
 };

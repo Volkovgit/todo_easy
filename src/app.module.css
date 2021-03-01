@@ -3,14 +3,14 @@
   position: absolute;
   top: 20%;
   left: 20%;
-  width: 500px;
+  width: 700px;
   height: 700px;
 }
 
 
 
 .header {
-  
+  display: inline-block;
   height: 100px;
 }
 

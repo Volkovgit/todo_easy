@@ -9,17 +9,23 @@ import { addNew, deleteItem, setItemDone } from "../redux/reducer/todoReducer";
 function Home() {
   const todoItems = useSelector(({ todoItems }) => todoItems.items);
   const dispatch = useDispatch();
-
   const [textBySearch, setTextBySearch] = React.useState("");
+  const [filterByDone, setFilterByDone] = React.useState(null)
 
   let data = React.useMemo(
-    () => todoItems.filter((item) => item.text.includes(textBySearch)),
-    [todoItems, textBySearch]
+    () => todoItems.filter((item) => {
+      if(filterByDone == null) return item.text.includes(textBySearch)
+      return item.text.includes(textBySearch)&& item.done === filterByDone
+    }),
+    [todoItems, textBySearch,filterByDone]
   );
 
   const findBySearch = (text) => {
     setTextBySearch(text);
   };
+  const setFilter =(type)=>{
+    setFilterByDone(type)
+  }
 
   const addTodo = (text) => {
     if (text) {
@@ -35,11 +41,13 @@ function Home() {
     dispatch(setItemDone(id));
   };
 
+  
+
   return (
     <div>
       <div className={style.app}>
         <div className={style.header}>
-          <Header findBySearch={findBySearch} />
+          <Header findBySearch={findBySearch} setFilter={setFilter} />
         </div>
         <div className={style.body}>
           <Body

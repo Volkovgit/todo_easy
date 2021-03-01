@@ -1,28 +1,28 @@
 import React from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
+
+
+import {IconButton,Checkbox,ListItemText,ListItem,List } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./body.module.css";
-import classNames from 'classnames'
+import classNames from "classnames";
 
-const Body = ({ items, deleteItem,getDone }) => {
+const Body = ({ items, deleteItem, getDone }) => {
   return (
     <div>
       <List>
         {items.map((item, index) => (
           <ListItem onClick={() => getDone(item.id)} key={index}>
-            {/* <Checkbox
+            <Checkbox
+              classes={{label:'checButton'}}
               tabIndex={-1}
+              checked={!item.done}
               disableRipple
-              onClick={() => getDone(item.id)}
-            /> */}
-            <ListItemText
-              className={!item.done ? styles.disable : ''}
-              primary={item.text}
+              // onClick={() => getDone(item.id)}
             />
+            <ListItemText
+              className={!item.done ? styles.disable : ""}
+              primary={item.text}
+            ></ListItemText>
             <IconButton
               aria-label="Delete"
               onClick={() => {
