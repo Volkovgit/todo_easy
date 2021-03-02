@@ -3,12 +3,12 @@ const DELETE_ITEM = "DELETE_ITEM";
 const SWITCH_DONE = "SWITCH_DONE"
 const initialState = {
   items: [
-    { id: 0, text: "some text1", date: "228", done: false },
-    { id: 1, text: "some text2", date: "1337", done: true },
-    { id: 2, text: "some text3", date: "1488", done: false },
-    { id: 3, text: "some text4", date: "4:20", done: false },
+    { id: 0, text: "Купить яблоки", date: "228", done: false,category:'food' },
+    { id: 1, text: "Купить фарш", date: "1337", done: true,category:'food' },
+    { id: 2, text: "Написать todo приложение", date: "1488", done: true,category:'programming' },
+    { id: 3, text: "Поехать на учебу", date: "4:20", done: false,category:'education' },
   ],
-  text: "asdsf",
+
 };
 
 export const todoReducer = (state = initialState, action) => {

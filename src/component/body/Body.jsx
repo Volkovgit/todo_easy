@@ -13,7 +13,8 @@ const Body = ({ items, deleteItem, getDone }) => {
         {items.map((item, index) => (
           <ListItem onClick={() => getDone(item.id)} key={index}>
             <Checkbox
-              classes={{label:'checButton'}}
+              
+              color="default"
               tabIndex={-1}
               checked={!item.done}
               disableRipple

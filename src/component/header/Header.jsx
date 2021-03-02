@@ -13,7 +13,7 @@ const Header = ({ findBySearch,setFilter }) => {
           variant="outlined"
           placeholder="Find"
           margin="normal"
-          color="normal"
+          
           inputRef={newSearchText}
           // value={text}
           onChange={(event) => onChangeInputField(event.target.value)}

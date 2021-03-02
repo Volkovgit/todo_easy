@@ -8,6 +8,7 @@ import { addNew, deleteItem, setItemDone } from "../redux/reducer/todoReducer";
 
 function Home() {
   const todoItems = useSelector(({ todoItems }) => todoItems.items);
+  
   const dispatch = useDispatch();
   const [textBySearch, setTextBySearch] = React.useState("");
   const [filterByDone, setFilterByDone] = React.useState(null)

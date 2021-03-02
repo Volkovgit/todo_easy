@@ -17,7 +17,6 @@ const Footer = ({ addNewItem }) => {
           variant="outlined"
           placeholder="Add"
           margin="normal"
-          color="normal"
           value={newText}
           onChange={(e) => setNewText(e.currentTarget.value)}
         />
