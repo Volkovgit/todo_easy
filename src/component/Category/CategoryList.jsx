@@ -17,12 +17,13 @@ import Body from "../body/Body";
 function CategoryList({
   categories,
   todoItems,
-  newCategory,
+  switchCurrentCategory,
   currentCategory,
   addCategory,
   ...props
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [newCategory, setNewCategory] = React.useState("");
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -30,6 +31,11 @@ function CategoryList({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const addNewCategory = (text)=>{
+    addCategory(text);
+    setNewCategory('');
+  }
 
   return (
     <div className={styles.category}>
@@ -45,8 +51,18 @@ function CategoryList({
           </IconButton>
           <Typography variant="h6">{currentCategory}</Typography>
           <div className={styles.inputNewCategory}>
-            <TextField></TextField>
-            <Button variant="contained" onClick={()=>addCategory()}>Add Category</Button>
+            <TextField
+              val={newCategory}
+              onChange={(e) => setNewCategory(e.currentTarget.value)}
+            ></TextField>
+            <Button
+              variant="contained"
+              onClick={() => {
+                addNewCategory(newCategory);
+              }}
+            >
+              Add Category
+            </Button>
           </div>
 
           <Menu
@@ -60,7 +76,7 @@ function CategoryList({
               <div>
                 <MenuItem
                   onClick={() => {
-                    newCategory(cat);
+                    switchCurrentCategory(cat);
                     handleClose();
                   }}
                 >

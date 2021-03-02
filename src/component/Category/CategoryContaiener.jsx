@@ -5,7 +5,8 @@ import {
   addNew,
   deleteItem,
   setItemDone,
-  setUserCategories
+  setUserCategories,
+  addNewCategory
 } from "../../redux/reducer/todoReducer";
 function CategoryContaiener() {
   const todoItems = useSelector(({ todoItems }) => todoItems.items);
@@ -46,8 +47,9 @@ function CategoryContaiener() {
   };
 
 
-  const setUserCategory =()=>{
-    console.log('test');
+  const addCategory =(newCategory)=>{
+    console.log(newCategory);
+    dispatch(addNewCategory(newCategory));
   }
   
 
@@ -56,11 +58,11 @@ function CategoryContaiener() {
       <CategoryList
         categories={categoryItems}
         todoItems={data}
-        newCategory={switchCurrentCategory}
+        switchCurrentCategory={switchCurrentCategory}
         currentCategory={currentCategory}
         deleteItem={deleteTodoItem}
         getDone={switchItemDone}
-        addCategory={setUserCategory}
+        addCategory={addCategory}
       />
     </div>
   );

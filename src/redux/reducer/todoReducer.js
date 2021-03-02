@@ -2,6 +2,8 @@ const ADD_NEW = "ADD NEW";
 const DELETE_ITEM = "DELETE_ITEM";
 const SWITCH_DONE = "SWITCH_DONE";
 const SET_USER_CATEGORY = "SET_USER_CATEGORY";
+const ADD_NEW_CATEGORY = "ADD_NEW_CATEGORY"
+
 const initialState = {
   items: [
     {
@@ -76,6 +78,9 @@ export const todoReducer = (state = initialState, action) => {
         categories: [...allCategories]
       }
     }
+    case ADD_NEW_CATEGORY:{
+      return {...state,categories:[...state.categories,action.placeholder]}
+    }
     default:
       return state;
   }
@@ -98,6 +103,11 @@ export const setItemDone = (id) => ({
 
 export const setUserCategories = () => ({
   type: SET_USER_CATEGORY,
+});
+
+export const addNewCategory = (newCategory)=>({
+  type: ADD_NEW_CATEGORY,
+  placeholder: newCategory
 });
 
 export default todoReducer;
