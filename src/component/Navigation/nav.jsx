@@ -6,9 +6,9 @@ import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 const Nav = () => {
   return (
     <div>
-      <BottomNavigation>
+      <BottomNavigation >
         <NavLink to="/home">
-          <BottomNavigationAction icon={<HomeIcon />}></BottomNavigationAction>
+          <BottomNavigationAction label="Home" icon={<HomeIcon />}></BottomNavigationAction>
         </NavLink>
         <NavLink to="/category">
           <BottomNavigationAction icon={<CategoryIcon />}></BottomNavigationAction>

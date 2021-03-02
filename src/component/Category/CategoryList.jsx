@@ -7,14 +7,21 @@ import {
   Typography,
   Menu,
   MenuItem,
+  TextField,
+  AddIcon,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import styles from "./category.module.css";
 import Body from "../body/Body";
 
-
-
-function CategoryList({ categories, todoItems,newCategory,currentCategory,...props }) {
+function CategoryList({
+  categories,
+  todoItems,
+  newCategory,
+  currentCategory,
+  addCategory,
+  ...props
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,6 +44,11 @@ function CategoryList({ categories, todoItems,newCategory,currentCategory,...pro
             <MenuIcon />
           </IconButton>
           <Typography variant="h6">{currentCategory}</Typography>
+          <div className={styles.inputNewCategory}>
+            <TextField></TextField>
+            <Button variant="contained" onClick={()=>addCategory()}>Add Category</Button>
+          </div>
+
           <Menu
             id="simple-menu"
             anchorEl={anchorEl}
@@ -48,7 +60,7 @@ function CategoryList({ categories, todoItems,newCategory,currentCategory,...pro
               <div>
                 <MenuItem
                   onClick={() => {
-                    newCategory(cat)
+                    newCategory(cat);
                     handleClose();
                   }}
                 >
@@ -60,7 +72,12 @@ function CategoryList({ categories, todoItems,newCategory,currentCategory,...pro
           </Menu>
         </Toolbar>
       </AppBar>
-      <Body items={todoItems} deleteItem={props.deleteItem} getDone={props.getDone}/>
+      <Body
+        items={todoItems}
+        deleteItem={props.deleteItem}
+        getDone={props.getDone}
+      />
+      {currentCategory ? <div>Test</div> : ""}
     </div>
   );
 }
