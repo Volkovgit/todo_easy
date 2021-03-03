@@ -13,6 +13,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import styles from "./category.module.css";
 import Body from "../body/Body";
+import Footer from "../footer/Footer";
 
 function CategoryList({
   categories,
@@ -52,7 +53,7 @@ function CategoryList({
           <Typography variant="h6">{currentCategory}</Typography>
           <div className={styles.inputNewCategory}>
             <TextField
-              val={newCategory}
+              value={newCategory}
               onChange={(e) => setNewCategory(e.currentTarget.value)}
             ></TextField>
             <Button
@@ -93,7 +94,7 @@ function CategoryList({
         deleteItem={props.deleteItem}
         getDone={props.getDone}
       />
-      {currentCategory ? <div>Test</div> : ""}
+      {currentCategory ? <div><Footer addNewItem={props.addNewByCategory} currentCategory={currentCategory}/></div> : ""}
     </div>
   );
 }

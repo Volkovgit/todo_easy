@@ -3,11 +3,11 @@ import { TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
 
-const Footer = ({ addNewItem }) => {
+const Footer = ({ addNewItem, currentCategory }) => {
   const [newText, setNewText] = React.useState("");
 
   const addNewTodo = (text) => {
-    addNewItem(text);
+    addNewItem(text,currentCategory);
     setNewText("");
   };
   return (

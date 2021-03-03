@@ -6,18 +6,20 @@ import {
   deleteItem,
   setItemDone,
   setUserCategories,
-  addNewCategory
+  addNewCategory,
 } from "../../redux/reducer/todoReducer";
+import Footer from "../footer/Footer";
+import styles from "./category.module.css";
+
 function CategoryContaiener() {
   const todoItems = useSelector(({ todoItems }) => todoItems.items);
   const [currentCategory, setCurrentCategory] = React.useState(null);
   const dispatch = useDispatch();
-  
-  React.useEffect(()=>{
-    dispatch(setUserCategories());
-  },[])
-  const categoryItems = useSelector(({ todoItems }) => todoItems.categories);
 
+  React.useEffect(() => {
+    dispatch(setUserCategories());
+  }, []);
+  const categoryItems = useSelector(({ todoItems }) => todoItems.categories);
 
   let data = React.useMemo(
     () =>
@@ -34,7 +36,7 @@ function CategoryContaiener() {
 
   const addTodo = (text) => {
     if (text) {
-      dispatch(addNew(text));
+      dispatch(addNew(text,currentCategory));
     }
   };
 
@@ -46,12 +48,10 @@ function CategoryContaiener() {
     dispatch(setItemDone(id));
   };
 
-
-  const addCategory =(newCategory)=>{
+  const addCategory = (newCategory) => {
     console.log(newCategory);
     dispatch(addNewCategory(newCategory));
-  }
-  
+  };
 
   return (
     <div>
@@ -63,7 +63,9 @@ function CategoryContaiener() {
         deleteItem={deleteTodoItem}
         getDone={switchItemDone}
         addCategory={addCategory}
+        addNewByCategory={addTodo}
       />
+
     </div>
   );
 }

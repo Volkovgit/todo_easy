@@ -5,6 +5,7 @@ import style from "../app.module.css";
 import Header from "./header/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { addNew, deleteItem, setItemDone } from "../redux/reducer/todoReducer";
+import SimpleCard from "./Card/card";
 
 function Home() {
   const todoItems = useSelector(({ todoItems }) => todoItems.items);
@@ -12,6 +13,8 @@ function Home() {
   const dispatch = useDispatch();
   const [textBySearch, setTextBySearch] = React.useState("");
   const [filterByDone, setFilterByDone] = React.useState(null)
+
+  const [isOpenCard,setIsOpenCard] = React.useState(false);
 
   let data = React.useMemo(
     () => todoItems.filter((item) => {
@@ -28,9 +31,9 @@ function Home() {
     setFilterByDone(type)
   }
 
-  const addTodo = (text) => {
+  const addTodo = (text,category = 'default') => {
     if (text) {
-      dispatch(addNew(text));
+      dispatch(addNew(text,category));
     }
   };
 
@@ -41,6 +44,11 @@ function Home() {
   const switchItemDone = (id) => {
     dispatch(setItemDone(id));
   };
+
+  const openCard = ()=>{
+    setIsOpenCard(!isOpenCard)
+  }
+
 
   
 
@@ -55,6 +63,7 @@ function Home() {
             items={data}
             deleteItem={deleteTodoItem}
             getDone={switchItemDone}
+            openCard={openCard}
           />
         </div>
         <div className={style.footer}>

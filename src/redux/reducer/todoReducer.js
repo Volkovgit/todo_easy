@@ -3,6 +3,7 @@ const DELETE_ITEM = "DELETE_ITEM";
 const SWITCH_DONE = "SWITCH_DONE";
 const SET_USER_CATEGORY = "SET_USER_CATEGORY";
 const ADD_NEW_CATEGORY = "ADD_NEW_CATEGORY"
+const CHANGE_TEXT = "CHANGE_TEXT"
 
 const initialState = {
   items: [
@@ -36,6 +37,7 @@ export const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW: {
       let now = new Date().toLocaleDateString();
+      debugger;
       return {
         ...state,
         items: [
@@ -45,7 +47,7 @@ export const todoReducer = (state = initialState, action) => {
             text: action.placeholder,
             date: now,
             done: true,
-            category: "programming",
+            category: action.categ,
           },
         ],
       };
@@ -81,14 +83,24 @@ export const todoReducer = (state = initialState, action) => {
     case ADD_NEW_CATEGORY:{
       return {...state,categories:[...state.categories,action.placeholder]}
     }
+    case CHANGE_TEXT:{
+      return{
+        ...state,
+        items: state.items.map((item)=>{
+          if(item.id === action.id) return {...item,text:action.newText}
+          return item
+        })
+      }
+    }
     default:
       return state;
   }
 };
 
-export const addNew = (text) => ({
+export const addNew = (text,newCategoryAC) => ({
   type: ADD_NEW,
   placeholder: text,
+  categ: newCategoryAC
 });
 
 export const deleteItem = (id) => ({
@@ -109,5 +121,11 @@ export const addNewCategory = (newCategory)=>({
   type: ADD_NEW_CATEGORY,
   placeholder: newCategory
 });
+
+export const changeTextCurrentTodo = (id,text)=>({
+  type: CHANGE_TEXT,
+  id: id,
+  newText: text
+})
 
 export default todoReducer;
